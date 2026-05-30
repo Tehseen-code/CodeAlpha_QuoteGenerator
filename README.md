@@ -1,42 +1,49 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web.
+# 📄 Quote Generator App — Task 2
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+<p align="center">
+  <img src="https://img.shields.io/badge/Kotlin-Multiplatform-purple?style=for-the-badge&logo=kotlin" alt="KMP" />
+  <img src="https://img.shields.io/badge/Compose-Multiplatform-blue?style=for-the-badge&logo=android" alt="CMP" />
+  <img src="https://img.shields.io/badge/Architecture-MVVM-green?style=for-the-badge" alt="MVVM" />
+  <img src="https://img.shields.io/badge/Database-Room-orange?style=for-the-badge" alt="Room" />
+</p>
 
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
-
-### Running the apps
-
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
-
-- Android app: `./gradlew :androidApp:assembleDebug`
-- Web app:
-  - Wasm target (faster, modern browsers): `./gradlew :webApp:wasmJsBrowserDevelopmentRun`
-  - JS target (slower, supports older browsers): `./gradlew :webApp:jsBrowserDevelopmentRun`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
-
-### Running tests
-
-Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
-
-- Android tests: `./gradlew :shared:testAndroidHostTest`
-- Web tests:
-  - Wasm target: `./gradlew :shared:wasmJsTest`
-  - JS target: `./gradlew :shared:jsTest`
-- iOS tests: `./gradlew :shared:iosSimulatorArm64Test`
+An elegant, cross-platform **Quote Generator Application** developed as part of the **CodeAlpha Internship (Task 2)**. Built entirely with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**, this app combines a beautiful, reactive user interface with a robust, offline-first data layer targeting both Android and iOS from a single shared codebase.
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
+## ✨ Key Features
 
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+* **🎨 Custom Splash Experience:** A sleek, premium splash entry using optimized vector graphics and smooth transition states.
+* **💡 Dynamic Quote Discovery:** Seamlessly browse through a rich collection of inspiring quotes with a modern Material 3 UI.
+* **⚡ Reactive State Management:** Zero UI lag or stutter, utilizing modern asynchronous streams for real-time data sync.
+
+---
+
+## 🛠️ Architecture & Tech Stack
+
+The application is engineered using production-grade standards and enterprise design patterns:
+
+| Component | Technology Stack | Purpose |
+| :--- | :--- | :--- |
+| **Language** | Kotlin 🚀 | Core language for cross-platform logic and safety. |
+| **UI Framework** | Compose Multiplatform (CMP) | Single declarative UI codebase shared across Android & iOS. |
+| **Architecture** | MVVM / Clean Architecture | Strict separation of concerns ensuring testability and scalability. |
+| **Concurrency** | Kotlin Coroutines & Flows | Reactive, non-blocking asynchronous state handling (`StateFlow`). |
+
+---
+
+## 🏗️ Project Architecture Overview
+
+```text
+📁 CodeAlpha_QuoteGenerator
+│
+├── 📂 composeApp (100% Shared UI & Logic)
+│    ├── 📂 commonMain
+│    │    ├── 📂 data        # Room DB Setup, Repositories, Entity Models
+│    │    ├── 📂 viewmodel   # Business Logic & UI State Controllers (MVVM)
+│    │    └── 📂 ui          # Jetpack Compose Screens, Custom Vectors & Themes
+│    │
+│    ├── 📂 androidMain     # Android Lifecycle Entry Points & Configs
+│    └── 📂 iosMain         # iOS Lifecycle Bindings & Configuration
+│
+└── 📂 iosApp               # Native Xcode wrapper for compiling the iOS Target
