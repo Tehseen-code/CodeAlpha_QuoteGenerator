@@ -1,10 +1,9 @@
-# 📄 Quote Generator App — Task 2
+<img width="533" height="192" alt="image" src="https://github.com/user-attachments/assets/0391b89c-7d0a-4e21-aab7-bd9353ce4c94" /># 📄 Quote Generator App — Task 2
 
 <p align="center">
   <img src="https://img.shields.io/badge/Kotlin-Multiplatform-purple?style=for-the-badge&logo=kotlin" alt="KMP" />
   <img src="https://img.shields.io/badge/Compose-Multiplatform-blue?style=for-the-badge&logo=android" alt="CMP" />
   <img src="https://img.shields.io/badge/Architecture-MVVM-green?style=for-the-badge" alt="MVVM" />
-  <img src="https://img.shields.io/badge/Database-Room-orange?style=for-the-badge" alt="Room" />
 </p>
 
 An elegant, cross-platform **Quote Generator Application** developed as part of the **CodeAlpha Internship (Task 2)**. Built entirely with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**, this app combines a beautiful, reactive user interface with a robust, offline-first data layer targeting both Android and iOS from a single shared codebase.
@@ -31,6 +30,15 @@ The application is engineered using production-grade standards and enterprise de
 | **Concurrency** | Kotlin Coroutines & Flows | Reactive, non-blocking asynchronous state handling (`StateFlow`). |
 
 ---
+
+## 🚀 Installation & Setup
+
+To get a local copy of this project up and running, clone the repository directly using the following link:
+
+```bash
+git clone [https://github.com/Tehseen-code/CodeAlpha_QuoteGenerator.git](https://github.com/Tehseen-code/CodeAlpha_QuoteGenerator.git)
+
+
 
 ## 🏗️ Project Architecture Overview
 
