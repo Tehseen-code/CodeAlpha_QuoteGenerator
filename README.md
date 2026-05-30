@@ -1,4 +1,4 @@
-                                                             # 📄 Quote Generator App — Task 2
+# 📄 Quote Generator App — Task 2
 
 <p align="center">
   <img src="https://img.shields.io/badge/Kotlin-Multiplatform-purple?style=for-the-badge&logo=kotlin" alt="KMP" />
@@ -37,6 +37,7 @@ To get a local copy of this project up and running, clone the repository directl
 
 ```bash
 git clone [https://github.com/Tehseen-code/CodeAlpha_QuoteGenerator.git](https://github.com/Tehseen-code/CodeAlpha_QuoteGenerator.git)
+---
 
 <img width="533" height="192" alt="image" src="https://github.com/user-attachments/assets/0391b89c-7d0a-4e21-aab7-bd9353ce4c94" />
 
