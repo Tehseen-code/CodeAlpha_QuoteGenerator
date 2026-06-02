@@ -6,15 +6,15 @@
   <img src="https://img.shields.io/badge/Architecture-MVVM-green?style=for-the-badge" alt="MVVM" />
 </p>
 
-An elegant, cross-platform **Quote Generator Application** developed as part of the **CodeAlpha Internship (Task 2)**. Built entirely with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**, this app combines a beautiful, reactive user interface with a robust, offline-first data layer targeting both Android and iOS from a single shared codebase.
+An elegant, cross-platform **Quote Generator Application** developed as part of the **CodeAlpha Internship (Task 2)**. Built entirely with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**, this app combines a beautiful, reactive user interface with a robust, asynchronous remote networking layer targeting both Android and iOS from a single shared codebase.
 
 ---
 
 ## ✨ Key Features
 
 * **🎨 Custom Splash Experience:** A sleek, premium splash entry using optimized vector graphics and smooth transition states.
-* **💡 Dynamic Quote Discovery:** Seamlessly browse through a rich collection of inspiring quotes with a modern Material 3 UI.
-* **⚡ Reactive State Management:** Zero UI lag or stutter, utilizing modern asynchronous streams for real-time data sync.
+* **💡 Dynamic Quote Discovery:** Seamlessly browse through a rich collection of inspiring quotes fetched dynamically over the network with a modern Material 3 UI.
+* **⚡ Reactive State Management:** Zero UI lag or stutter, utilizing modern asynchronous data streams for real-time network UI synchronization.
 
 ---
 
@@ -24,39 +24,41 @@ The application is engineered using production-grade standards and enterprise de
 
 | Component | Technology Stack | Purpose |
 | :--- | :--- | :--- |
-| **Language** | Kotlin 🚀 | Core language for cross-platform logic and safety. |
+| **Language** | Kotlin 🚀 | Core language for cross-platform logic and type safety. |
 | **UI Framework** | Compose Multiplatform (CMP) | Single declarative UI codebase shared across Android & iOS. |
+| **Networking** | Ktor Client 🌐 | Multiplatform asynchronous HTTP client to handle REST API requests. |
 | **Architecture** | MVVM / Clean Architecture | Strict separation of concerns ensuring testability and scalability. |
 | **Concurrency** | Kotlin Coroutines & Flows | Reactive, non-blocking asynchronous state handling (`StateFlow`). |
 
 ---
 
-## 🚀 Installation & Setup
+## 🧠 Technical Deep Dive: Asynchronous Networking with Ktor & Flows
 
-To get a local copy of this project up and running, clone the repository using:
+When engineering the data layer for this application, a critical focus was ensuring that remote network requests over HTTP would never freeze or block the Main Thread (UI execution pipeline), maintaining an optimal framerate during API interactions.
 
-```bash
-git clone https://github.com/Tehseen-code/CodeAlpha_QuoteGenerator.git
-```
+### 1. Non-Blocking API Requests with Ktor
+The core data pipeline uses **Ktor Client** configured with Content Negotiation and JSON serialization. Network requests execute entirely within background coroutine scopes, allowing the application to safely pull raw data across the web without impacting UI rendering performance.
 
----
+```kotlin
+class QuoteRepository(private val httpClient: HttpClient) {
+    // Explicit background context fetching to isolate remote API latency from the UI
+    suspend fun fetchNextQuote(): QuoteModel = withContext(Dispatchers.Default) {
+        httpClient.get("[https://api.quotable.io/random](https://api.quotable.io/random)").body<QuoteModel>()
+    }
+}
 
-## 📸 Preview
-
-<img width="533" height="192" alt="App Preview" src="https://github.com/user-attachments/assets/0391b89c-7d0a-4e21-aab7-bd9353ce4c94" />
-
-## 🏗️ Project Architecture Overview
-
-```text
 📁 CodeAlpha_QuoteGenerator
 │
 ├── 📂 composeApp (100% Shared UI & Logic)
-│    ├── 📂 commonMain
-│    │    ├── 📂 data        # Room DB Setup, Repositories, Entity Models
-│    │    ├── 📂 viewmodel   # Business Logic & UI State Controllers (MVVM)
-│    │    └── 📂 ui          # Jetpack Compose Screens, Custom Vectors & Themes
-│    │
-│    ├── 📂 androidMain     # Android Lifecycle Entry Points & Configs
-│    └── 📂 iosMain         # iOS Lifecycle Bindings & Configuration
+│   ├── 📂 commonMain
+│   │   ├── 📂 data        # Ktor API Engine Setup, Network Repositories, Data Transfer Models
+│   │   ├── 📂 viewmodel   # Business Logic, Network Dispatchers & UI State Controllers (MVVM)
+│   │   └── 📂 ui          # Jetpack Compose Screens, Custom Vectors, Components & Themes
+│   │
+│   ├── 📂 androidMain     # Android Lifecycle Entry Points, Activities & Manifest Configurations
+│   └── 📂 iosMain         # iOS Lifecycle Bindings, UI Framework Entry & Target Linkages
 │
-└── 📂 iosApp               # Native Xcode wrapper for compiling the iOS Target
+└── 📂 iosApp               # Native Xcode project wrapper used for compiling the final iOS App
+
+To get a local copy of this project up and running, clone the repository using:
+git clone [https://github.com/Tehseen-code/CodeAlpha_QuoteGenerator.git](https://github.com/Tehseen-code/CodeAlpha_QuoteGenerator.git)
