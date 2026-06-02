@@ -59,6 +59,6 @@ class QuoteRepository(private val httpClient: HttpClient) {
 │   └── 📂 iosMain         # iOS Lifecycle Bindings, UI Framework Entry & Target Linkages
 │
 └── 📂 iosApp               # Native Xcode project wrapper used for compiling the final iOS App
-
+---
 To get a local copy of this project up and running, clone the repository using:
 git clone [https://github.com/Tehseen-code/CodeAlpha_QuoteGenerator.git](https://github.com/Tehseen-code/CodeAlpha_QuoteGenerator.git)
